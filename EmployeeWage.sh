@@ -1,7 +1,6 @@
 #!/bin/bash
 echo "WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM"
 
-Month=20
 WagePerHr=20
 TotalWage=0
 declare -a Day
@@ -15,11 +14,17 @@ function WorkingHr
 	esac
 }
 
-for (( i=1; i<=$Month; i++ ))
+
+read -p "Enter the day for total wage : " nmb
+for (( i=1; i<=$nmb; i++ ))
 do
                 Random=$((RANDOM%3))
                 Day[$i]=$(($WagePerHr*`WorkingHr $Random`))
                 TotalWage=$(($TotalWage+${Day[$i]}))
 done
-echo -e "${Day[@]}\nAre the Daily Wages"
-echo "Total Wage is $TotalWage "
+for i in ${!Day[@]}
+do
+	echo "Day $i = ${Day[$i]}"
+done
+
+echo "Total Wage is $TotalWage for $nmb days "
