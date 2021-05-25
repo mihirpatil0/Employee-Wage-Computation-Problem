@@ -1,10 +1,10 @@
 #!/bin/bash
 echo "WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM"
 
-WorkHr=0
 Month=20
 WagePerHr=20
-MonthWage=0
+TotalWage=0
+declare -a Day
 
 function WorkingHr
 {	
@@ -17,29 +17,9 @@ function WorkingHr
 
 for (( i=1; i<=$Month; i++ ))
 do
-        if [ $WorkHr -lt 100 ]
-        then
                 Random=$((RANDOM%3))
-                case $Random in
-
-                        1) #echo "Employee is Full Time Present"
-                                #DayHr=8
-                                WageCalc=$(($WagePerHr*`WorkingHr $Random`))
-                                MonthWage=$(($MonthWage+$WageCalc))
-                                WorkHr=$(($WorkHr+`WorkingHr $Random`)) ;;
-                        2) #echo "Employee is Part Time Present"
-                                DayHr=4
-                                WageCalc=$(($WagePerHr*`WorkingHr $Random`))
-                                MonthWage=$(($MonthWage+$WageCalc))
-                                WorkHr=$(($WorkHr+`WorkingHr $Random`)) ;;
-                        0) #echo "Employee is Absent"
-                                DayHr=0 ;;
-
-                esac
-        else
-                break;
-        fi
+                Day[$i]=$(($WagePerHr*`WorkingHr $Random`))
+                TotalWage=$(($TotalWage+${Day[$i]}))
 done
-#echo "The Employee's Daily Wage is : $WageCalc"
-#echo "The Employee Monthly Wage is : $MonthWage"
-echo "The Employee Monthly wage is $MonthWage Rupee for $WorkHr Hr in $(($i-1)) days"
+echo -e "${Day[@]}\nAre the Daily Wages"
+echo "Total Wage is $TotalWage "
