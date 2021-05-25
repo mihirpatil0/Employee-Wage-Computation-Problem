@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "WELCOME TO EMPLOYEE WAGE COMPUTATION PROGRAM"
+
+
